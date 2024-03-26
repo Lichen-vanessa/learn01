@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>猜數字遊戲</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>猜數字遊戲</h1>
+<p>請輸入一個1到100之間的數字:</p>
+<input type="text" id="guessField">
+<button onclick="checkGuess()">猜一猜</button>
+<p id="message"></p>
+
+<script>
+    // 生成1到100之間的隨機數字
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    // 紀錄猜測次數
+    let guesses = 0;
+
+    function checkGuess() {
+        // 獲取玩家的猜測值
+        const userGuess = parseInt(document.getElementById('guessField').value);
+        // 更新猜測次數
+        guesses++;
+
+        // 判斷猜測值是否正確
+        if (userGuess === randomNumber) {
+            document.getElementById('message').textContent = `恭喜你！你猜對了！你用了 ${guesses} 次猜中了數字 ${randomNumber}！`;
+        } else if (userGuess < randomNumber) {
+            document.getElementById('message').textContent = '猜得太低了，再試試更大的數字。';
+        } else if (userGuess > randomNumber) {
+            document.getElementById('message').textContent = '猜得太高了，再試試更小的數字。';
+        }
+
+        // 清空輸入欄
+        document.getElementById('guessField').value = '';
+    }
+</script>
+</body>
+</html>
